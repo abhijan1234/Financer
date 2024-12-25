@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  financer.api:
-    image: ${DOCKER_REGISTRY-}financer
-    build:
-      context: .
-      dockerfile: src/Financer.API/Dockerfile

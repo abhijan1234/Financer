@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: deployment
+metadata:
+  name: financer-api-deployment
+  annotation:
+    kubernetes.io/change-cause: "Initial"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: financer-api
+  template:
+    metadata:
+      name: financerapi
+      labels:
+        env: prod
+        app: financer-api
+        app.kubernetes.io/name: financer-api
+    spec:
+      containers:
+        - name: financer-api
+          image: yuri1999/financeapi:latest
+          ports:
+            - containerPort: 80
+              name: http-web-api
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
