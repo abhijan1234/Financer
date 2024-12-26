@@ -1,0 +1,1 @@
+When running the container locally, once the deployement and service is applied we need to run kubectl port-forward svc/financer-api-service 8080:8080 as locally there is no LoadBalancer present.
