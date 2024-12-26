@@ -1,8 +1,8 @@
 apiVersion: apps/v1
-kind: deployment
+kind: Deployment
 metadata:
   name: financer-api-deployment
-  annotation:
+  annotations:
     kubernetes.io/change-cause: "Initial"
 spec:
   replicas: 1
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: financer-api
-          image: yuri1999/financeapi:latest
+          image: yuri1999/financeapi:v1
           ports:
             - containerPort: 80
               name: http-web-api
