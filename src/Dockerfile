@@ -7,10 +7,15 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /source
 
-COPY ["Financer.API.csproj", "Financer.API/"]
+COPY ["Financer.API/Financer.API.csproj", "Financer.API/"]
+COPY ["Financer.DataAccess/Financer.DataAccess.csproj", "Financer.DataAccess/"]
+COPY ["Financer.Infrastructure/Financer.Infrastructure.csproj", "Financer.Infrastructure/"]
 RUN dotnet restore "Financer.API/Financer.API.csproj"
 
-COPY . /Financer.API
+COPY Financer.API /Financer.API
+COPY Financer.DataAccess /Financer.DataAccess
+COPY Financer.Infrastructure /Financer.Infrastructure
+
 WORKDIR "/Financer.API"
 RUN dotnet build "Financer.API.csproj" -c Release -o /app/build
 

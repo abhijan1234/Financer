@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Financer.API.Config;
+using Financer.DataAccess.Services;
+using Financer.Infrastructure.Services.JobServices;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using MongoDB.Driver;
 
 namespace Financer.API
 {
@@ -21,6 +24,15 @@ namespace Financer.API
 
             services.AddControllers();
             services.AddSwaggerGen();
+
+            var mongoConfig = Configuration.GetSection("Mongo").Get<MongoConfig>();
+            services.AddSingleton<IMongoDatabase>(client =>
+            {
+                var dbClient = new MongoClient(mongoConfig.DbConnectionString);
+                return dbClient.GetDatabase(mongoConfig.DatabaseName);
+            });
+            services.AddSingleton<IMongoService,MongoService>();
+            services.AddScoped<ICreateJobService, CreateJobService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
