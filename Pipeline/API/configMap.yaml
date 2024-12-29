@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: financer-api-config
+  labels:
+    app: financer-api
+data:
+  Mongo__DatabaseName: FinancerJob

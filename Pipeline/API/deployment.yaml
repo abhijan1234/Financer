@@ -20,6 +20,19 @@ spec:
       containers:
         - name: financer-api
           image: yuri1999/financeapi:v2
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:80
+            - name: Mongo__DbConnectionString
+              valueFrom:
+                secretKeyRef:
+                  name: financer-api-secrets
+                  key: Mongo__DbConnectionString
+            - name: Mongo__DatabaseName
+              valueFrom:
+                configMapKeyRef:
+                  name: financer-api-config
+                  key: Mongo__DatabaseName
           ports:
             - containerPort: 80
               name: http-web-api
@@ -30,6 +43,3 @@ spec:
             limits:
               cpu: 200m
               memory: 200Mi
-          env:
-            - name: ASPNETCORE_URLS
-              value: http://+:80
