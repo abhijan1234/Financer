@@ -12,12 +12,15 @@
     <None Remove="Swashbuckle.AspNetCore.SwaggerUI" />
     <None Remove="MongoDB.Driver" />
     <None Remove="Controllers\" />
+    <None Remove="RabbitMQ.Client" />
+    <None Remove="Config\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="7.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.2.0" />
     <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Financer.DataAccess\Financer.DataAccess.csproj">
@@ -29,5 +32,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Config\" />
   </ItemGroup>
 </Project>

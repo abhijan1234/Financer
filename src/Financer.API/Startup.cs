@@ -1,11 +1,14 @@
-﻿using Financer.API.Config;
+﻿using System;
+using Financer.API.Config;
 using Financer.DataAccess.Services;
+using Financer.Infrastructure.Factories;
 using Financer.Infrastructure.Services.JobServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using RabbitMQ.Client;
 
 namespace Financer.API
 {
@@ -25,12 +28,24 @@ namespace Financer.API
             services.AddControllers();
             services.AddSwaggerGen();
 
+            // Dependency Injection of MongoDb
             var mongoConfig = Configuration.GetSection("Mongo").Get<MongoConfig>();
-            services.AddSingleton<IMongoDatabase>(client =>
+            if(string.IsNullOrEmpty(mongoConfig.DbConnectionString))
             {
-                var dbClient = new MongoClient(mongoConfig.DbConnectionString);
-                return dbClient.GetDatabase(mongoConfig.DatabaseName);
-            });
+                throw new Exception("No MongoDB connection was found");
+            }
+            services.AddSingleton<IMongoDatabase>(
+                new MongoDbConnectionFactory(mongoConfig.DbConnectionString, mongoConfig.DatabaseName)
+                .InitializeConnection());
+
+            // Dependency Injection of RabbitMQ
+            var rabbitmqConnection= Configuration.GetSection("RabbitMq").Get<RabbitMqConfig>();
+            if(string.IsNullOrEmpty(rabbitmqConnection.ConnectionUri))
+            {
+                throw new Exception("No RabbitMQ connection was found");
+            }
+            //services.AddSingleton(new RabbitMqConnectionFactory(rabbitmqConnection.ConnectionUri).CreateConnection());
+
             services.AddSingleton<IMongoService,MongoService>();
             services.AddScoped<ICreateJobService, CreateJobService>();
         }

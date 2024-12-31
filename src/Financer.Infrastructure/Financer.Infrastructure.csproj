@@ -10,9 +10,17 @@
   <ItemGroup>
     <None Remove="Services\" />
     <None Remove="Services\JobServices\" />
+    <None Remove="Event\" />
+    <None Remove="RabbitMQ.Client" />
+    <None Remove="Factories\Interface\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Services\JobServices\" />
+    <Folder Include="Factories\" />
+    <Folder Include="Factories\Interface\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="RabbitMQ.Client" Version="6.0.0" />
   </ItemGroup>
 </Project>
