@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Financer.DataAccess.Entities.Jobs;
-using Financer.Infrastructure.Services.JobServices;
+using Financer.Infrastructure.Repository.JobRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financer.API.Controllers
@@ -9,10 +9,10 @@ namespace Financer.API.Controllers
     [Route("api/[controller]")]
     public class JobsController : Controller
     {
-        private readonly ICreateJobService _createJobService;
-        public JobsController(ICreateJobService createJobService)
+        private readonly ICreateJobRepository _createJobRepository;
+        public JobsController(ICreateJobRepository createJobRepository)
         {
-            _createJobService = createJobService;
+            _createJobRepository = createJobRepository;
         }
 
         [HttpGet]
@@ -24,7 +24,7 @@ namespace Financer.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateJob([FromBody] CreateJob job)
         {
-            var createdJob = await _createJobService.CreateJobAsync(job);
+            var createdJob = await _createJobRepository.CreateJobAsync(job);
             return Ok(createdJob);
         }
     }

@@ -10,11 +10,17 @@
     <None Remove="Entities\Jobs\" />
     <None Remove="Services\" />
     <None Remove="Microsoft.Extensions.Options" />
+    <None Remove="Services\DatabaseService\" />
+    <None Remove="Entities\Outbox\" />
+    <None Remove="Entities\Finance\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Entities\Jobs\" />
     <Folder Include="Services\" />
+    <Folder Include="Services\DatabaseService\" />
+    <Folder Include="Entities\Outbox\" />
+    <Folder Include="Entities\Finance\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.1.0" />

@@ -1,14 +1,13 @@
 ﻿using System;
 using Financer.API.Config;
-using Financer.DataAccess.Services;
+using Financer.DataAccess.Services.DatabaseService;
 using Financer.Infrastructure.Factories;
-using Financer.Infrastructure.Services.JobServices;
+using Financer.Infrastructure.Repository.JobRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
-using RabbitMQ.Client;
 
 namespace Financer.API
 {
@@ -40,14 +39,23 @@ namespace Financer.API
 
             // Dependency Injection of RabbitMQ
             var rabbitmqConnection= Configuration.GetSection("RabbitMq").Get<RabbitMqConfig>();
-            if(string.IsNullOrEmpty(rabbitmqConnection.ConnectionUri))
+            if(string.IsNullOrEmpty(rabbitmqConnection.HostName) ||
+                string.IsNullOrEmpty(rabbitmqConnection.Port.ToString()) ||
+                string.IsNullOrEmpty(rabbitmqConnection.UserName) ||
+                string.IsNullOrEmpty(rabbitmqConnection.Password))
             {
-                throw new Exception("No RabbitMQ connection was found");
+                throw new Exception("No RabbitMQ connection could not be created. Missing configuration");
             }
-            //services.AddSingleton(new RabbitMqConnectionFactory(rabbitmqConnection.ConnectionUri).CreateConnection());
+            services.AddSingleton(new RabbitMqConnectionFactory(
+                rabbitmqConnection.HostName,
+                rabbitmqConnection.Port,
+                rabbitmqConnection.UserName,
+                rabbitmqConnection.Password
+                ).CreateConnection());
 
+            // Dependency Injection of services
             services.AddSingleton<IMongoService,MongoService>();
-            services.AddScoped<ICreateJobService, CreateJobService>();
+            services.AddScoped<ICreateJobRepository, CreateJobRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
