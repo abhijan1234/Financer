@@ -13,12 +13,14 @@
     <None Remove="Event\" />
     <None Remove="RabbitMQ.Client" />
     <None Remove="Factories\Interface\" />
+    <None Remove="Repository\EventRepository\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Services\JobServices\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Repository\JobRepository\" />
     <Folder Include="Factories\" />
     <Folder Include="Factories\Interface\" />
+    <Folder Include="Repository\EventRepository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="RabbitMQ.Client" Version="6.0.0" />

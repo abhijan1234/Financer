@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using System.Threading.Tasks;
 
-namespace Financer.DataAccess.Services
+namespace Financer.DataAccess.Services.DatabaseService
 {
     public class MongoService : IMongoService
     {
@@ -12,10 +12,10 @@ namespace Financer.DataAccess.Services
             _mongoDatabase = mongoDatabase;
         }
 
-        public async Task InsertAync<T>(T data, string collectionName)
+        public async Task InsertAync<T>(T data, string collectionName, IClientSessionHandle? clientSession = null)
         {
             var collection = _mongoDatabase.GetCollection<T>(collectionName);
-            await collection.InsertOneAsync(data);
+            await collection.InsertOneAsync(clientSession,data);
         }
     }
 }

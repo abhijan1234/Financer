@@ -1,4 +1,5 @@
 ﻿using System;
+using Financer.DataAccess.Entities.Finance;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -9,7 +10,7 @@ namespace Financer.DataAccess.Entities.Jobs
         [BsonElement("JobType")]
         public string JobType { get; set; }
 
-        [BsonElement("CreatedAt")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [BsonElement("FinanceData")]
+        public FinanceData FinanceData { get; set; }
     }
 }

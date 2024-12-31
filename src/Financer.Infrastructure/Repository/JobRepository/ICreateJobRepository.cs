@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Financer.DataAccess.Entities.Jobs;
 
-namespace Financer.Infrastructure.Services.JobServices
+namespace Financer.Infrastructure.Repository.JobRepository
 {
-    public interface ICreateJobService
+    public interface ICreateJobRepository
     {
         Task<Job> CreateJobAsync(CreateJob job);
     }
