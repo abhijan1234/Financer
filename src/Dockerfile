@@ -10,11 +10,13 @@ WORKDIR /source
 COPY ["Financer.API/Financer.API.csproj", "Financer.API/"]
 COPY ["Financer.DataAccess/Financer.DataAccess.csproj", "Financer.DataAccess/"]
 COPY ["Financer.Infrastructure/Financer.Infrastructure.csproj", "Financer.Infrastructure/"]
+COPY ["Shared/SharedResources/SharedResources.csproj", "Shared/SharedResources/"]
 RUN dotnet restore "Financer.API/Financer.API.csproj"
 
 COPY Financer.API /Financer.API
 COPY Financer.DataAccess /Financer.DataAccess
 COPY Financer.Infrastructure /Financer.Infrastructure
+COPY Shared/SharedResources /Shared/SharedResources
 
 WORKDIR "/Financer.API"
 RUN dotnet build "Financer.API.csproj" -c Release -o /app/build

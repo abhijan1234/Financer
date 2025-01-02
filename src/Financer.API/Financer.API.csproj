@@ -13,7 +13,6 @@
     <None Remove="MongoDB.Driver" />
     <None Remove="Controllers\" />
     <None Remove="RabbitMQ.Client" />
-    <None Remove="Config\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="7.2.0" />
@@ -29,9 +28,11 @@
     <ProjectReference Include="..\Financer.Infrastructure\Financer.Infrastructure.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\SharedResources\SharedResources.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Config\" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financer.DataAccess", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financer.Infrastructure", "src\Financer.Infrastructure\Financer.Infrastructure.csproj", "{30D8FC40-06E4-4A72-8D1F-1457895DC7A4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundEventServices", "BackgroundEventServices", "{7EA88404-24B5-4A58-9582-3831FAA0CAB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financer.OutboxEventService", "src\BackgroundEventServices\Financer.OutboxEventService\Financer.OutboxEventService.csproj", "{33A5FFAF-D763-494B-B23B-5911CC294D01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{1B47B379-C6CB-4CFD-9746-FA76232358D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedResources", "src\Shared\SharedResources\SharedResources.csproj", "{09495784-A312-4BF6-94DD-44643DF2FAD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,11 +35,23 @@ Global
 		{30D8FC40-06E4-4A72-8D1F-1457895DC7A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30D8FC40-06E4-4A72-8D1F-1457895DC7A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30D8FC40-06E4-4A72-8D1F-1457895DC7A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A5FFAF-D763-494B-B23B-5911CC294D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A5FFAF-D763-494B-B23B-5911CC294D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A5FFAF-D763-494B-B23B-5911CC294D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A5FFAF-D763-494B-B23B-5911CC294D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09495784-A312-4BF6-94DD-44643DF2FAD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09495784-A312-4BF6-94DD-44643DF2FAD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09495784-A312-4BF6-94DD-44643DF2FAD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09495784-A312-4BF6-94DD-44643DF2FAD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68175333-B5FC-4674-B772-3867775AC9E9}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33A5FFAF-D763-494B-B23B-5911CC294D01} = {7EA88404-24B5-4A58-9582-3831FAA0CAB2}
+		{09495784-A312-4BF6-94DD-44643DF2FAD8} = {1B47B379-C6CB-4CFD-9746-FA76232358D8}
 	EndGlobalSection
 EndGlobal
