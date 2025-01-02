@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Financer.Infrastructure.Factories.Interface;
 using RabbitMQ.Client;
 
 namespace Financer.Infrastructure.Factories
 {
-    public class RabbitMqConnectionFactory
+    public class RabbitMqConnectionFactory : IConnectionFactory<IConnection>
     {
         public readonly string _hostName;
         public readonly int _port;
@@ -23,7 +23,7 @@ namespace Financer.Infrastructure.Factories
             _password = password;
         }
 
-        public IConnection CreateConnection()
+        public IConnection InitializeConnection()
         {
             var ConnectionFactory = new ConnectionFactory
             {

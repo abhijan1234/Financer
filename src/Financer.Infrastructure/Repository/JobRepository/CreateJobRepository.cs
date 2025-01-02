@@ -24,11 +24,11 @@ namespace Financer.Infrastructure.Repository.JobRepository
         {
             Job newJob = new Job
             {
-                JobType = job.JobType,
                 JobId = Guid.NewGuid().ToString(),
-                JobStatus = "Started",
+                JobInfo = job,
+                JobStatus = "Created",
                 LastUpdated = DateTime.UtcNow,
-                UserId = Guid.NewGuid().ToString()
+                UserId = Guid.NewGuid().ToString(),
             };
 
             OutboxEvent outbox = new OutboxEvent

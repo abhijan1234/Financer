@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Financer.DataAccess.Services.DatabaseService
@@ -16,6 +17,12 @@ namespace Financer.DataAccess.Services.DatabaseService
         {
             var collection = _mongoDatabase.GetCollection<T>(collectionName);
             await collection.InsertOneAsync(clientSession,data);
+        }
+
+        public async Task<List<T>> GetAllAsync<T>(string collectionName)
+        {
+            var collection = _mongoDatabase.GetCollection<T>(collectionName);
+            return await collection.Find(_ => true).ToListAsync();
         }
     }
 }

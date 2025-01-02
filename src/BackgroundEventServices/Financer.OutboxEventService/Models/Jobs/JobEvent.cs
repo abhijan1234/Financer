@@ -1,11 +1,14 @@
 ﻿using System;
-using Financer.DataAccess.Entities.Finance;
+using Financer.OutboxEventService.Models.Finance;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Financer.DataAccess.Entities.Jobs
+namespace Financer.OutboxEventService.Models.Jobs
 {
-    public class CreateJob
+    public class JobEvent
     {
+        [BsonElement("JobId")]
+        public string JobId { get; set; }
+
         [BsonElement("JobType")]
         public string JobType { get; set; }
 

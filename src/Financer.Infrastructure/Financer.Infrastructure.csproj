@@ -6,23 +6,21 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Financer.DataAccess\Financer.DataAccess.csproj" />
+    <ProjectReference Include="..\Shared\SharedResources\SharedResources.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Services\" />
     <None Remove="Services\JobServices\" />
     <None Remove="Event\" />
     <None Remove="RabbitMQ.Client" />
-    <None Remove="Factories\Interface\" />
-    <None Remove="Repository\EventRepository\" />
+    <None Remove="Microsoft.Extensions.Hosting" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\" />
     <Folder Include="Repository\JobRepository\" />
-    <Folder Include="Factories\" />
-    <Folder Include="Factories\Interface\" />
-    <Folder Include="Repository\EventRepository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="RabbitMQ.Client" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
   </ItemGroup>
 </Project>
