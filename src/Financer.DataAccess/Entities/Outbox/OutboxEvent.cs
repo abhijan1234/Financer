@@ -7,8 +7,8 @@ namespace Financer.DataAccess.Entities.Outbox
     [BsonIgnoreExtraElements]
     public class OutboxEvent
     {
-        [BsonElement("EventName")]
-        public string EventName { get; set; }
+        [BsonElement("EventId")]
+        public string EventId { get; set; }
 
         [BsonElement("Content")]
         public Job? Content { get; set; }
@@ -22,7 +22,7 @@ namespace Financer.DataAccess.Entities.Outbox
         [BsonElement("Error")]
         public string? Error { get; set; }
 
-        [BsonElement("InProcessed")]
-        public bool InProcessed { get; set; }
+        [BsonElement("IsSent")]
+        public bool IsSent { get; set; }
     }
 }

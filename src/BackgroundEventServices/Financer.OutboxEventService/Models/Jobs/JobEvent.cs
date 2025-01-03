@@ -1,5 +1,5 @@
 ﻿using System;
-using Financer.OutboxEventService.Models.Finance;
+using Financer.DataAccess.Entities.Finance;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Financer.OutboxEventService.Models.Jobs

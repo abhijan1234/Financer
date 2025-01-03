@@ -26,16 +26,16 @@ namespace Financer.Infrastructure.Repository.JobRepository
             {
                 JobId = Guid.NewGuid().ToString(),
                 JobInfo = job,
-                JobStatus = "Created",
+                JobStatus = Constants.JobStatus.Created,
                 LastUpdated = DateTime.UtcNow,
                 UserId = Guid.NewGuid().ToString(),
             };
 
             OutboxEvent outbox = new OutboxEvent
             {
-                EventName = Constants.EventInfo.JobCreateEvent,
+                EventId = Guid.NewGuid().ToString(),
                 Content = newJob,
-                InProcessed = false
+                IsSent = false
             };
 
             using var session = await _database.Client.StartSessionAsync();
