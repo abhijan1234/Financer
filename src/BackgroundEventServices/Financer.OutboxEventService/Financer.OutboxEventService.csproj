@@ -20,6 +20,7 @@
     <None Remove="Models\" />
     <None Remove="Models\Job\" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="EventManager\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

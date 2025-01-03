@@ -12,5 +12,14 @@
         {
             public const string JobCreateEvent = "JobCreated";
         }
+
+        public class JobStatus
+        {
+            public const string Created = "Created";
+            public const string InProgress = "InProgress";
+            public const string Completed = "Completed";
+            public const string Failed = "Failed";
+
+        }
     } 
 }

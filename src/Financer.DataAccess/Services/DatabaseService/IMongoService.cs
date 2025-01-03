@@ -8,5 +8,6 @@ namespace Financer.DataAccess.Services.DatabaseService
     {
         Task InsertAync<T>(T data, string collectionName, IClientSessionHandle? clientSessionHandle = null);
         Task<List<T>> GetAllAsync<T>(string collectionName);
+        Task UpdateAync<T>(string collectionName, string identifierName, object identifierValue, Dictionary<string, object> updateData);
     }
 }
