@@ -67,34 +67,47 @@ namespace Financer.OutboxEventService
 
                         using var session = await _mongoDatabase.Client.StartSessionAsync();
                         {
-                            var outBoxUpdateClause = new Dictionary<string, object>
+                            session.StartTransaction();
+                            try
                             {
-                                {"IsSent", true}
-                            };
-                            await _mongoService.UpdateAync<OutboxEvent>(
-                            Constants.MongoInfo.OutboxCollection,
-                            "Content.JobId",
-                            item.Content.JobId,
-                            outBoxUpdateClause
-                            );
+                                var outBoxUpdateClause = new Dictionary<string, object>
+                                {
+                                    {"IsSent", true}
+                                };
+                                await _mongoService.UpdateAync<OutboxEvent>(
+                                    Constants.MongoInfo.OutboxCollection,
+                                    "Content.JobId",
+                                    item.Content.JobId,
+                                    outBoxUpdateClause,
+                                    session
+                                    );
 
-                            var jobUpdateClause = new Dictionary<string, object>
+                                var jobUpdateClause = new Dictionary<string, object>
+                                {
+                                    { "JobStatus", Constants.JobStatus.InProgress }
+                                };
+
+                                await _mongoService.UpdateAync<Job>(
+                                    Constants.MongoInfo.JobCollection,
+                                    "JobId",
+                                    item.Content.JobId,
+                                    jobUpdateClause,
+                                    session
+                                    );
+                                await session.CommitTransactionAsync();
+                            }
+                            catch(Exception ex)
                             {
-                                { "JobStatus", Constants.JobStatus.InProgress }
-                            };
-                            await _mongoService.UpdateAync<Job>(
-                                Constants.MongoInfo.JobCollection,
-                                "JobId",
-                                item.Content.JobId,
-                                jobUpdateClause);
-                            await session.CommitTransactionAsync();
+                                await session.AbortTransactionAsync();
+                                _logger.LogError($"Transaction failed with this error message: {ex.Message}");
+                                throw ex;
+                            }
+                            
                         }
-                        //var updateResponse = await _mongoService.UpdateOutBoxEventAsync<OutboxEvent>(Constants.MongoInfo.OutboxCollection, item.Content.JobId, true);
                     }
                     catch (Exception ex)
                     {
                         _logger.LogError(ex.Message);
-                        var updateResponse = await _mongoService.UpdateOutBoxEventAsync<OutboxEvent>(Constants.MongoInfo.OutboxCollection, item.Content.JobId, false);
                     }
                 }
                 await Task.Delay(1000, stoppingToken);

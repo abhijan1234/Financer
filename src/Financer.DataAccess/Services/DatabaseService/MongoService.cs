@@ -27,7 +27,7 @@ namespace Financer.DataAccess.Services.DatabaseService
             return await collection.Find(_ => true).ToListAsync();
         }
 
-        public async Task UpdateAync<T>(string collectionName, string id,object value, Dictionary<string, object> updateData)
+        public async Task UpdateAync<T>(string collectionName, string id,object value, Dictionary<string, object> updateData, IClientSessionHandle? clientSession = null)
         {
             var collection = _mongoDatabase.GetCollection<T>(collectionName);
             var updateDefinition = Builders<T>.Update.Combine(
@@ -35,7 +35,7 @@ namespace Financer.DataAccess.Services.DatabaseService
                 );
 
             var filter = Builders<T>.Filter.Eq(id, value);
-            var result = await collection.UpdateOneAsync(filter, updateDefinition);
+            var result = await collection.UpdateOneAsync(clientSession, filter, updateDefinition);
             if(result.MatchedCount == 0)
             {
                 throw new InvalidOperationException($"No item matched with {id} : {value}");
