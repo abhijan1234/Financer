@@ -42,6 +42,9 @@ namespace Financer.OutboxEventService
 
                 // Reading all unprocessed data
 
+
+                // Reading all unprocessed data
+
                 var allOutBoxData = await _mongoService.GetAllAsync<OutboxEvent>(Constants.MongoInfo.OutboxCollection);
 
                 var result = allOutBoxData.FindAll( data => data.IsSent == false &&
@@ -53,6 +56,8 @@ namespace Financer.OutboxEventService
                     exclusive: false,
                     autoDelete: false,
                     arguments: null);
+
+                // Sending all unprocessed data to the queue
 
                 // Sending all unprocessed data to the queue
 
