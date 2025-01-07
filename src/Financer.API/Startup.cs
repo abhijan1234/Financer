@@ -37,22 +37,6 @@ namespace Financer.API
                 new MongoDbConnectionFactory(mongoConfig.DbConnectionString, mongoConfig.DatabaseName)
                 .InitializeConnection());
 
-            // Dependency Injection of RabbitMQ
-            //var rabbitmqConnection= Configuration.GetSection("RabbitMq").Get<RabbitMqConfig>();
-            //if(string.IsNullOrEmpty(rabbitmqConnection.HostName) ||
-            //    string.IsNullOrEmpty(rabbitmqConnection.Port.ToString()) ||
-            //    string.IsNullOrEmpty(rabbitmqConnection.UserName) ||
-            //    string.IsNullOrEmpty(rabbitmqConnection.Password))
-            //{
-            //    throw new Exception("No RabbitMQ connection could not be created. Missing configuration");
-            //}
-            //services.AddSingleton(new RabbitMqConnectionFactory(
-            //    rabbitmqConnection.HostName,
-            //    rabbitmqConnection.Port,
-            //    rabbitmqConnection.UserName,
-            //    rabbitmqConnection.Password
-            //    ).InitializeConnection());
-
             // Dependency Injection of services
             services.AddSingleton<IMongoService,MongoService>();
             services.AddScoped<ICreateJobRepository, CreateJobRepository>();

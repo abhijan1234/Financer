@@ -14,7 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\SharedResources\SharedResources.csproj" />
     <ProjectReference Include="..\..\Financer.DataAccess\Financer.DataAccess.csproj" />
-    <ProjectReference Include="..\..\Financer.Infrastructure\Financer.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
