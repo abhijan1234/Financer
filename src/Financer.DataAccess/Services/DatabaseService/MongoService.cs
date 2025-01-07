@@ -34,11 +34,18 @@ namespace Financer.DataAccess.Services.DatabaseService
                 updateData.Select(field => Builders<T>.Update.Set(field.Key, field.Value))
                 );
 
-            var filter = Builders<T>.Filter.Eq(id, value);
-            var result = await collection.UpdateOneAsync(clientSession, filter, updateDefinition);
-            if(result.MatchedCount == 0)
+            var options = new FindOneAndUpdateOptions<T>
             {
-                throw new InvalidOperationException($"No item matched with {id} : {value}");
+                ReturnDocument = ReturnDocument.Before // Retrieve the document before the update
+            };
+
+            var filter = Builders<T>.Filter.Eq(id, value);
+
+            // This will handle atomicity while updating the records even if there are multiple replicas
+            var result = await collection.FindOneAndUpdateAsync(clientSession, filter, updateDefinition, options);
+            if(result == null)
+            {
+                throw new InvalidOperationException($"Failed to update item with {id} : {value}");
             }
         }
     }
